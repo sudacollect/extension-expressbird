@@ -29,7 +29,7 @@ trait ExpressbirdTrait
         $key_name = 'expressbird_'.$express_code.'_setting';
 
         
-        $config_setting = Cache::store(config('zhila.admin_cache','file'))->get($key_name);
+        $config_setting = Cache::store(config('sudaconf.admin_cache','file'))->get($key_name);
 
         if(!$config_setting)
         {

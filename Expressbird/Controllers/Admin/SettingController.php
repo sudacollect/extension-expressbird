@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Cache;
 
 use App\Extensions\Expressbird\Controllers\AdminController;
 use Gtd\Suda\Models\Setting;
+use Gtd\Suda\Models\Media;
 
 use GuzzleHttp\Client as HttpClient;
 
@@ -74,7 +75,7 @@ class SettingController extends AdminController{
             $settingModel->fill($data)->save();
         }
 
-        Cache::store(config('zhila.admin_cache','file'))->forever($key_name,$values);
+        Cache::store(config('sudaconf.admin_cache','file'))->forever($key_name,$values);
 
         return $this->responseAjax('success','参数配置完成');
 
@@ -138,7 +139,7 @@ class SettingController extends AdminController{
             $settingModel->fill($data)->save();
         }
 
-        Cache::store(config('zhila.admin_cache','file'))->forever($key_name,$values);
+        Cache::store(config('sudaconf.admin_cache','file'))->forever($key_name,$values);
 
         return $this->responseAjax('success','链接参数配置完成');
 
@@ -150,7 +151,7 @@ class SettingController extends AdminController{
         $this->title('使用说明');
         $this->setMenu('help_menu');
 
-        $expressbird = app('expressbird')->channel('sfexpress');
+        // $expressbird = app('expressbird')->channel('sfexpress');
 
         // dd($expressbird);
 
@@ -174,7 +175,7 @@ class SettingController extends AdminController{
         return $this->display('setting.help_'.$express_code);
     }
 
-    public function showMeituanHelp(Request $request,ExpressbirdFactory $expressbird)
+    public function showMeituanHelp(Request $request)
     {
         
         // echo '<pre>';

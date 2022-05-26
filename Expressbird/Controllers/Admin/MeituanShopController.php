@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Carbon;
 
 use App\Extensions\Expressbird\Controllers\AdminController;
+use Gtd\Suda\Models\Setting;
 
 use GuzzleHttp\Client as HttpClient;
 
@@ -25,6 +26,7 @@ class MeituanShopController extends AdminController{
 
     public function index(Request $request)
     {
+        $this->gate('meituan_menu.shop',app(Setting::class));
         
         $this->title('门店列表');
 
@@ -41,6 +43,7 @@ class MeituanShopController extends AdminController{
 
     public function showDetail(Request $request,$id)
     {
+        $this->gate('meituan_menu.shop',app(Setting::class));
         
         $this->title('门店详情');
 
@@ -57,6 +60,7 @@ class MeituanShopController extends AdminController{
 
     public function shopQuery(Request $request, ExpressbirdFactory $express, $shop_id='')
     {
+        $this->gate('meituan_menu.shop',app(Setting::class));
         
         $this->title('查询门店');
 

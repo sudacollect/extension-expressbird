@@ -36,11 +36,10 @@ class MtOrder extends Model
         return $this->order_id?$this->order_id:$value;
     }
 
-    // public function order()
-    // {
-    //     // 对应你的应用，关联订单
-    //     return $this->hasOne('App\Extensions\Store\Models\Order','order_id','order_id');
-    // }
+    public function order()
+    {
+        return $this->hasOne('App\Extensions\Westore\Models\Order','order_id','order_id');
+    }
     
     public function logs()
     {

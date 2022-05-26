@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container">
-    <div class="row zhila-row">
+    <div class="row app-row">
         
 
         
@@ -13,14 +13,15 @@
             <i class="zly-paper"></i>&nbsp;&nbsp;订单列表
         </h1>
         
+        <div class="col-sm-12">
         @if(isset($data) && $data && $data->count()>0)
 
         
-        <div class="col-sm-12">
+        
             <div class="card">
                 
 
-                @if(isset($data) && $data->count()>0)
+                
                 <div class="card-body" id="list_content">
                     
                     <!-- list start -->
@@ -62,12 +63,12 @@
                                 {{ bcdiv($item->delivery_fee,100,2) }}
                               </td>
                               <td>
-                                <a class="zhila-modal-box btn btn-xs btn-primary " style="margin-bottom:10px;" href="{{ admin_url('extension/expressbird/meituan/orderlogs/'.$item->shop_order_id) }}">查看日志</a>
+                                <a class="pop-modal btn btn-xs btn-primary " style="margin-bottom:10px;" href="{{ admin_url('extension/expressbird/meituan/orderlogs/'.$item->shop_order_id) }}">查看日志</a>
                                 
-                                {{-- <a class="zhila-modal-box btn btn-xs btn-primary " style="margin-bottom:10px;" href="{{ admin_url('extension/expressbird/printer/edit/'.$item->id) }}">编辑</a> --}}
+                                {{-- <a class="pop-modal btn btn-xs btn-primary " style="margin-bottom:10px;" href="{{ admin_url('extension/expressbird/printer/edit/'.$item->id) }}">编辑</a> --}}
                                 
                                 @if($item->status!=50 && $item->status!=99)
-                                <button class="btn btn-xs btn-default zhila-info-box " style="margin-bottom:10px;" zhila-info-box="true" data_title="是否取消" data_action="cancel" data_id="{{ $item->id }}" href="{{ admin_url('extension/expressbird/meituan/order/cancel/'.$item->id) }}">取消发单</button>
+                                <button class="btn btn-xs btn-default pop-modal-box " style="margin-bottom:10px;" data_title="是否取消" data_action="cancel" data_id="{{ $item->id }}" href="{{ admin_url('extension/expressbird/meituan/order/cancel/'.$item->id) }}">取消发单</button>
                                 @endif
                               </td>
                             </tr>
@@ -81,12 +82,13 @@
                     </div>
                 
                 </div>
-                @endif
-        </div>
-        
+                
 
+            </div>
+        @else
+        @include('view_suda::admin.component.empty')
         @endif
-        
+        </div>
         
     </div>
 </div>

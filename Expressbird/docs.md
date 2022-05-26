@@ -51,7 +51,7 @@ protected function registerExpressResolver()
 boot 新增一行
 
 ```
-public function boot(Router $router)
+public function boot()
 {
     $router->middlewareGroup('expressbird', [ExpressbirdMiddleware::class]);
 }

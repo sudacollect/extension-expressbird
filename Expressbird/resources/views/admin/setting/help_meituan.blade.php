@@ -5,11 +5,11 @@
 @section('content')
 
 <div class="container">
-    <div class="row zhila-row">
+    <div class="row app-row">
         
 
         
-        <h1 class="page-title">
+        <h1 class="page-title  ms-3">
             使用说明
         </h1>
         

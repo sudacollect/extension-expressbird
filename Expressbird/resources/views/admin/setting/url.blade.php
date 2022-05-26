@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container">
-    <div class="row zhila-row">
+    <div class="row app-row">
         <div class="page-heading">
             
             <h1 class="page-title"><i class="zly-gear-s-o"></i>&nbsp;&nbsp;链接参数</h1>

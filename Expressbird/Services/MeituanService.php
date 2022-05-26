@@ -19,10 +19,11 @@ use App\Extensions\Expressbird\Models\MtLog;
 use App\Extensions\Expressbird\Models\MtShop;
 use App\Extensions\Expressbird\Services\MeituanLogService;
 
-use App\Extensions\Expressbird\Models\ExpressbirdCorp;
+use App\Extensions\Westore\Models\Order;
+use App\Extensions\Westore\Models\DeliveryCorp;
 
-// use App\Extensions\Store\Models\Order;
-// use App\Extensions\Store\Services\Order\DeliveryService;
+use App\Extensions\Expressbird\Models\ExpressbirdCorp;
+use App\Extensions\Westore\Services\Order\DeliveryService;
 
 class MeituanService implements ExpressbirdFactory
 {
@@ -63,7 +64,7 @@ class MeituanService implements ExpressbirdFactory
     {
         $express_code = 'meituan';
         $key_name = 'expressbird_'.$express_code.'_setting';
-        $basic_config = Cache::store(config('zhila.admin_cache','file'))->get($key_name);
+        $basic_config = Cache::store(config('sudaconf.admin_cache','file'))->get($key_name);
 
         if(!$basic_config)
         {
@@ -185,7 +186,13 @@ class MeituanService implements ExpressbirdFactory
             //=订单发货
 
             //to-send-orer 美团自动发货
-            $corp_id = 'meituan';
+            $corp = DeliveryCorp::where(['corp_code'=>'meituan'])->first();
+            $corp_id = 0;
+            if($corp)
+            {
+                $corp_id = $corp->id;
+            }
+
 
             $dlyService = new DeliveryService;
             $from = 'system';
@@ -872,9 +879,6 @@ class MeituanService implements ExpressbirdFactory
          *   cancel_reason_id
          *   cancel_reason
          *   predict_delivery_time
-         * 
-         * 
-         * 
          */
 
         //#1 发单日志
@@ -999,8 +1003,8 @@ class MeituanService implements ExpressbirdFactory
             'order_id'=>$params['order_id'],
             'delivery_id'=>$params['delivery_id'],
             'mt_peisong_id'=>$params['mt_peisong_id'],
-            'status'=>$params['exception_id'],
-            'content'=>'订单异常: '.$params['exception_code'].$params['exception_descr'].' time: '.$params['exception_time'],
+            'status'=>$params['exception_code'],
+            'content'=>'订单异常: '.$params['exception_id'].$params['exception_descr'].' time: '.$params['exception_time'],
         ];
         if(isset($params['courier_name']))
         {
@@ -1020,7 +1024,44 @@ class MeituanService implements ExpressbirdFactory
 
     }
 
+    // 门店配送风险等级回调
+    public function updateShopRisk($params)
+    {
+        $params = $this->paramsProcess($params);
+        if(!$params)
+        {
+            return falsle;
+        }
+
+        MtShop::where(['shop_id'=>$params['shop_id']])->update([
+            'delivery_risk_level' => $params['delivery_risk_level'],
+        ]);
+
+        return true;
+
+    }
+
     // 回调处理 END ==========================
+
+    // 处理回调的参数
+    public function paramsProcess(array $params)
+    {
+        $sign = '';
+        if(isset($params['sign']))
+        {
+            $sign = $params['sign'];
+            unset($params['sign']);
+        }
+
+        $sign_check = $this->checkSign($sign,$params);
+        if(!$sign_check)
+        {
+            Log::info('[EB美团]回调失败',['msg'=>'签名验证失败','params'=>$params]);
+            return false;
+        }
+
+        return $params;
+    }
 
     //生成签名
     public function makeSign(&$params)

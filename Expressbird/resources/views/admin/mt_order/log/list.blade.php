@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container container-fix">
-    <div class="row zhila-row">
+    <div class="row app-row">
 
         <div class="page-heading">
             <h1 class="page-title">
@@ -59,7 +59,7 @@
                               </td>
                               <td>
                                 @if(!in_array($item->order_status,['1','2','10','12','15','17']))
-                                  <button href="{{ admin_url('extension/expressbird/log/resend/'.$item->id) }}" class="btn btn-danger btn-xs" zhila-info-box="true" data_id="{{ $item->id }}" title="重新发送" data-toggle="tooltip" data-placement="top" >重新发单</button>
+                                  <button href="{{ admin_url('extension/expressbird/log/resend/'.$item->id) }}" class="btn btn-danger btn-xs pop-modal-box" data_id="{{ $item->id }}" title="重新发送" data-toggle="tooltip" data-placement="top" >重新发单</button>
                                 @endif
                               </td>
                             </tr>

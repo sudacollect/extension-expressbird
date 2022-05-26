@@ -9,6 +9,7 @@ use GuzzleHttp\Client as HttpClient;
 
 use Illuminate\Support\Arr;
 
+use Gtd\Suda\Models\Setting;
 
 use App\Extensions\Expressbird\Models\MtOrder;
 use App\Extensions\Expressbird\Models\MtLog;

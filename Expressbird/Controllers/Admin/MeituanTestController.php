@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Carbon;
 
 use App\Extensions\Expressbird\Controllers\AdminController;
+use Gtd\Suda\Models\Setting;
 
 use GuzzleHttp\Client as HttpClient;
 
@@ -26,6 +27,7 @@ class MeituanTestController extends AdminController{
 
     public function testOrderView(Request $request,$action)
     {
+        $this->gate('meituan_menu.test',app(Setting::class));
         $this->setMenu('meituan_menu','test');
 
         $this->title('模拟测试');

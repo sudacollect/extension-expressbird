@@ -4,10 +4,17 @@ namespace App\Extensions\Expressbird\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+
+use Gtd\Suda\Traits\HasTaxonomies;
+
+use Gtd\Suda\Traits\MediaTrait;
+use Gtd\Suda\Models\Setting;
 use Illuminate\Support\Carbon;
 
 class MtShop extends Model
 {
+    // use HasTaxonomies;
+    // use MediaTrait;
     
     protected $table = 'expressbird_mt_shops';
 
@@ -15,7 +22,7 @@ class MtShop extends Model
         "shop_id","shop_name","delivery_id","category","second_category","contact_name","contact_phone","contact_email","shop_address","shop_address_detail",
         "shop_lng","shop_lat","coordinate_type","delivery_service_codes",
         "begin_time","end_time","prebook","prebook_out_of_biz_time","prebook_period","pay_type_codes","status","reject_message",
-        "scope",
+        "scope",'delivery_risk_level',
     ];
     
     protected $appends = ['status_text'];

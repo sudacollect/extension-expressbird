@@ -39,7 +39,7 @@
                 </td>
                 <td>
                   @if(!in_array($item->status,[0,20,30,50,99]))
-                    <button href="{{ admin_url('extension/expressbird/meituan/orderlog/resend/'.$item->order_id) }}" class="btn btn-danger btn-xs" zhila-info-box="true" data_id="{{ $item->id }}" title="重新发送" data-toggle="tooltip" data-placement="top" >重新发单</button>
+                    <button href="{{ admin_url('extension/expressbird/meituan/orderlog/resend/'.$item->order_id) }}" class="btn btn-danger btn-xs pop-modal-box" data_id="{{ $item->id }}" title="重新发送" data-toggle="tooltip" data-placement="top" >重新发单</button>
                   @endif
                 </td>
               </tr>

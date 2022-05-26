@@ -5,12 +5,12 @@
 @section('content')
 
 <div class="container">
-    <div class="row zhila-row">
+    <div class="row app-row">
         
 
         
-        <h1 class="page-title">
-            <i class="zly-paper"></i>&nbsp;&nbsp;门店列表
+        <h1 class="page-title ms-3">
+            门店列表
             <a href="{{ admin_url('extension/expressbird/meituan/shop-query') }}" class="btn btn-primary btn-sm">查询门店</a>
         </h1>
         
@@ -31,8 +31,9 @@
                           <thead>
                               <tr>
                                 <th width="10%">ID</th>
-                                <th width="12%">门店编号</th>
-                                <th width="12%">城市</th>
+                                <th width="12%">编号</th>
+                                <th width="12%">配送风险</th>
+                                <th width="10%">城市</th>
                                 <th width="20%">联系信息</th>
                                 
                                 <th width="15%">状态</th>
@@ -52,6 +53,9 @@
                                 {{ $item->shop_id }}
                               </td>
                               <td width="12%">
+                                {{ $item->delivery_risk_level }}
+                              </td>
+                              <td width="10%">
                                 {{ $item->city }}
                               </td>
                               <td width="20%">
@@ -80,6 +84,8 @@
                     </div>
                 
                 </div>
+                @else
+                @include('view_suda::admin.component.empty',['without_card'=>true])
                 @endif
         </div>
         

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="zhila, hello@ecdo.co">
+    <meta name="author" content="suda, hello@ecdo.co">
     
     <title>{{ metas($sdcore) }}</title>
     <meta name="keywords" itemprop="keywords" content="{{ $sdcore->keywords }}">
@@ -25,8 +25,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
-        window.zhila = window.zhila || {};
-        zhila.meta = { csrfToken: "{{csrf_token()}}",url:"{{url('/')}}" }
+        window.suda = window.suda || {};
+        suda.meta = { csrfToken: "{{csrf_token()}}",url:"{{url('/')}}" }
     </script>
     
     @stack('scripts-head')
@@ -34,9 +34,9 @@
 </head>
 <body>
    
-    <div id="app" class="app-zhilapress">
+    <div id="app" class="app-row">
         
-        <nav class="navbar navbar-site navbar-static-top zhila-navbar">
+        <nav class="navbar navbar-site navbar-static-top">
             
             <div class="container container-flex">
                 <div class="navbar-header">
@@ -75,7 +75,6 @@
         
         @include('view_zest::site.layouts.footer')
         
-        @zhilapower
     </div>
     
     

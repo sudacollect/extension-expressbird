@@ -5,12 +5,12 @@
 @section('content')
 
 <div class="container">
-    <div class="row zhila-row">
+    <div class="row app-row">
         
 
         
-        <h1 class="page-title">
-            <i class="zly-paper"></i>&nbsp;&nbsp;使用说明
+        <h1 class="page-title ms-3">
+            使用说明
         </h1>
         
         <div class="col-sm-6">
@@ -22,9 +22,7 @@
                     </p>
 
                     <h4>1) 参数设置->基本设置</h4>
-                    <p>
-                        设置顺丰同城开放平台参数<br>
-                    </p>
+                    
                 
                 </div>
                 

@@ -3,7 +3,8 @@
 namespace App\Extensions\Expressbird\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Gtd\Suda\Traits\HasTaxonomies;
+use Gtd\Suda\Traits\MediaTrait;
 use Illuminate\Support\Carbon;
 
 use Gtd\Suda\Models\Media;

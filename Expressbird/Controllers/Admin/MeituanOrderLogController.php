@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Carbon;
 
 use App\Extensions\Expressbird\Controllers\AdminController;
+use Gtd\Suda\Models\Setting;
 
 use GuzzleHttp\Client as HttpClient;
 
@@ -24,6 +25,7 @@ class MeituanOrderLogController extends AdminController{
 
     public function index(Request $request)
     {
+        $this->gate('basic_menu.logs',app(Setting::class));
         
         $this->title('日志列表');
         $page_size = 20;
@@ -39,6 +41,7 @@ class MeituanOrderLogController extends AdminController{
 
     public function detailLogs(Request $request)
     {
+        // $this->gate('basic_menu.detaillogs',app(Setting::class));
         
         // $this->title('日志列表');
         // $page_size = 20;

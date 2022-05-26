@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Carbon;
 
 use App\Extensions\Expressbird\Controllers\AdminController;
+use Gtd\Suda\Models\Setting;
 
 use GuzzleHttp\Client as HttpClient;
 
@@ -26,12 +27,26 @@ class MeituanOrderController extends AdminController{
 
     public function index(Request $request)
     {
+        $this->gate('meituan_menu.mt_orders',app(Setting::class));
         
         $this->title('订单列表');
 
         $page_size = 20;
         $page_no = $request->page?$request->page:1;
         $data = MtOrder::where([])->orderBy('created_at','DESC')->paginate($page_size,['*'],'page',$page_no);
+
+        // echo '<pre>';
+        // print_r($data);
+        // exit();
+
+        // echo PHP_EOL;echo '<hr>';
+
+        // $logs = MtLog::where([])->get();
+        // echo '<pre>';
+        // print_r($logs);
+        // exit();
+        
+        // MtOrder::where(['order_id'=>'B2203151440256567'])->update(['delivery_id'=>'22031602221509507']);
 
         $this->setData('data',$data);
         
@@ -49,6 +64,14 @@ class MeituanOrderController extends AdminController{
 
         $order = MtOrder::where(['order_id'=>$order_id])->first();
         $logs = MtLog::where(['order_id'=>$order_id]);
+
+        
+        
+
+        // if($order->mt_peisong_id)
+        // {
+        //     $logs = $logs->orWhere(['mt_peisong_id'=>$order->mt_peisong_id]);
+        // }
         
         $logs = $logs->orderBy('created_at','DESC')->paginate($page_size,['*'],'page',$page_no);
 

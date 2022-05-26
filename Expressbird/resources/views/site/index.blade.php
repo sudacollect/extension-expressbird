@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container">
-    <div class="row zhila-row" style="margin-bottom:50px;">
+    <div class="row app-row" style="margin-bottom:50px;">
         
         <h1 class="page-title" style="text-align:center;margin-bottom:50px;"><i class="zly-home"></i>&nbsp;&nbsp;这是演示应用的首页</h1>
         

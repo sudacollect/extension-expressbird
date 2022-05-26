@@ -5,10 +5,16 @@ namespace App\Extensions\Expressbird\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
+use Gtd\Suda\Traits\HasTaxonomies;
+
+use Gtd\Suda\Traits\MediaTrait;
+use Gtd\Suda\Models\Setting;
 use Illuminate\Support\Carbon;
 
 class MtLog extends Model
 {
+    // use HasTaxonomies;
+    // use MediaTrait;
     
     protected $table = 'expressbird_mt_logs';
 

@@ -5,10 +5,10 @@
 @section('content')
 
 <div class="container">
-    <div class="row zhila-row">
+    <div class="row app-row">
         <div class="page-heading">
-            <h1 class="page-title">应用参数配置</h1>
-            <p class="help-block">需要创建好应用后获取相关参数</p>
+            <h1 class="page-title">参数配置</h1>
+            <span class="help-block">需要创建好应用后获取相关参数</span>
         </div>
         
         
@@ -17,13 +17,13 @@
                 
                 <div class="card-body">
 
-                    <form class="form-horizontal ajaxForm" role="form" method="POST" action="{{ admin_url('extension/expressbird/'.$express_code.'/setting/save') }}">
+                    <form class="ajaxForm" role="form" method="POST" action="{{ admin_url('extension/expressbird/'.$express_code.'/setting/save') }}">
                         @csrf
                       
-                      
-                        <div class="form-group{{ $errors->has('app_name') ? ' has-error' : '' }}">
+                        
+                        <div class="mb-3 row{{ $errors->has('app_name') ? ' has-error' : '' }}">
                             
-                            <label for="rules" class="col-sm-2 control-label">
+                            <label for="rules" class="col-sm-2 col-form-label">
                                 应用名称
                             </label>
                             <div class="col-sm-6">
@@ -32,7 +32,7 @@
                             
                         </div>
 
-                        <div class="form-group{{ $errors->has('app_id') ? ' has-error' : '' }}">
+                        <div class="mb-3 row{{ $errors->has('app_id') ? ' has-error' : '' }}">
                             
                             <label for="rules" class="col-sm-2 control-label">
                                 应用ID/Key
@@ -43,7 +43,7 @@
                             
                         </div>
 
-                        <div class="form-group{{ $errors->has('app_secret') ? ' has-error' : '' }}">
+                        <div class="mb-3 row{{ $errors->has('app_secret') ? ' has-error' : '' }}">
                             
                             <label for="rules" class="col-sm-2 control-label">
                                 应用密钥
@@ -55,7 +55,7 @@
                         </div>
                         
 
-                        <div class="form-group{{ $errors->has('max_distance') ? ' has-error' : '' }}">
+                        <div class="mb-3 row{{ $errors->has('max_distance') ? ' has-error' : '' }}">
                             
                             <label for="max_distance" class="col-sm-2 control-label">
                                 配送距离
@@ -67,7 +67,7 @@
                             
                         </div>
 
-                        <div class="form-group{{ $errors->has('max_distance_notice') ? ' has-error' : '' }}">
+                        <div class="mb-3 row{{ $errors->has('max_distance_notice') ? ' has-error' : '' }}">
                             
                             <label for="max_distance" class="col-sm-2 control-label">
                                 超距离提示
@@ -79,26 +79,49 @@
                             
                         </div>
 
-                        <div class="form-group form-inline {{ $errors->has('app_secret') ? ' has-error' : '' }}">
+                        <div class="mb-3 row{{ $errors->has('app_secret') ? ' has-error' : '' }}">
                             
                             <label for="rules" class="col-sm-2 control-label">
                                 运费公式
                             </label>
-                            <div class="col-sm-6 radio">
-                                起步公里：<input type="number" name="express_info[begin_km]" @if(isset($data) && isset($data['begin_km'])) value="{{ $data['begin_km'] }}" @endif class="form-control form-control-sm"><br>
-                                起步重量：<input type="number" name="express_info[begin_weight]" @if(isset($data) && isset($data['begin_weight'])) value="{{ $data['begin_weight'] }}" @endif class="form-control form-control-sm">kg<br>
-                                起步费用：<input type="number" name="express_info[begin_cost]" @if(isset($data) && isset($data['begin_cost'])) value="{{ $data['begin_cost'] }}" @endif class="form-control form-control-sm">元<br>
-    
-                                <br>
-                                超出后每公里：<input type="number" name="express_info[km_cost]" @if(isset($data) && isset($data['km_cost'])) value="{{ $data['km_cost'] }}" @endif class="form-control form-control-sm">元<br>
-                                超出后每公斤：<input type="number" name="express_info[weight_cost]" @if(isset($data) && isset($data['weight_cost'])) value="{{ $data['weight_cost'] }}" @endif class="form-control form-control-sm">元<br>
+                            <div class="col-sm-6">
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text" id="basic-addon1">起步公里</span>
+                                    <input type="number" name="express_info[begin_km]" @if(isset($data) && isset($data['begin_km'])) value="{{ $data['begin_km'] }}" @endif class="form-control form-control-sm">
+                                    <span class="input-group-text" id="basic-addon1">km</span>
+                                </div>
+                                
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text" id="basic-addon1">起步重量</span>
+                                    <input type="number" name="express_info[begin_weight]" @if(isset($data) && isset($data['begin_weight'])) value="{{ $data['begin_weight'] }}" @endif class="form-control form-control-sm">
+                                    <span class="input-group-text" id="basic-addon1">kg</span>
+                                </div>
+                                
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text" id="basic-addon1">起步费用</span>
+                                    <input type="number" name="express_info[begin_cost]" @if(isset($data) && isset($data['begin_cost'])) value="{{ $data['begin_cost'] }}" @endif class="form-control form-control-sm">
+                                    <span class="input-group-text" id="basic-addon1">元</span>
+                                </div>
+                                
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text" id="basic-addon1">超出后每公里</span>
+                                    <input type="number" name="express_info[km_cost]" @if(isset($data) && isset($data['km_cost'])) value="{{ $data['km_cost'] }}" @endif class="form-control form-control-sm">
+                                    <span class="input-group-text" id="basic-addon1">元</span>
+                                </div>
+                                
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text" id="basic-addon1">超出后每公斤</span>
+                                    <input type="number" name="express_info[weight_cost]" @if(isset($data) && isset($data['weight_cost'])) value="{{ $data['weight_cost'] }}" @endif class="form-control form-control-sm">
+                                    <span class="input-group-text" id="basic-addon1">元</span>
+                                </div>
+                                
                             </div>
                             
                         </div>
 
                         
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-6">
+                        <div class="mb-3 row">
+                            <div class="offset-sm-2 col-sm-6">
                             <button type="submit" class="btn btn-primary">提交保存</button>
                             </div>
                         </div>

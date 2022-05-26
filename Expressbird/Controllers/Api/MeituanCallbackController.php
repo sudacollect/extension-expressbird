@@ -12,6 +12,9 @@ use Illuminate\Support\Arr;
 
 use App\Extensions\Expressbird\Controllers\ApiController;
 
+
+use Gtd\Suda\Models\Setting;
+
 use GuzzleHttp\Client as HttpClient;
 
 use App\Extensions\Expressbird\Models\MtOrder;
@@ -65,23 +68,24 @@ class MeituanCallbackController extends ApiController
         
         $post = $request->all();
 
-        Log::info('[EB美团]订单配送异常',['method'=>$method,'post'=>$request_post,'GET'=>$_GET,'POST'=>$_POST]);
+        Log::info('[EB美团]订单配送异常',['method'=>$method,'post'=>$post,'GET'=>$_GET,'POST'=>$_POST]);
 
         $sign = '';
-        if(isset($request_post['sign']))
+        if(isset($post['sign']))
         {
-            $sign = $request_post['sign'];
-            Arr::forget($request_post,'sign');
+            $sign = $post['sign'];
+            Arr::forget($post,'sign');
         }
 
-        $sign_check = $mtService->checkSign($sign,$request_post);
+        $mtService = app('expressbird')->channel('meituan');
+        $sign_check = $mtService->checkSign($sign,$post);
         if(!$sign_check)
         {
             Log::info('[EB美团]订单配送异常',['msg'=>'签名验证失败']);
             return Response::json(['code'=>100,'message'=>'sign check failed']);
         }
 
-        $result = $mtService->updateError($request_post);
+        $result = $mtService->updateError($post);
 
         if(!$result)
         {
@@ -103,7 +107,7 @@ class MeituanCallbackController extends ApiController
         Log::info('[EB美团]配送风险等级更新',['data'=>$request->all()]);
 
         // 更新门店的配送风险等级
-        
+        $result = app('expressbird')->channel('meituan')->updateShopRisk($request->all());
 
         return $this->responseJson(['code'=>0],200);
     }

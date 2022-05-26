@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container">
-    <div class="row zhila-row">
+    <div class="row app-row">
         <div class="page-heading">
             
             <h1 class="page-title"><i class="zly-gear-s-o"></i>&nbsp;&nbsp;基本设置</h1>
@@ -75,7 +75,11 @@
 <script type="text/javascript">
     $(document).ready(function(){
         
-        $.fn.mediabox('media','zhila/modal/media/media','zhila/upload/image/media');
+        $.mediabox({
+            modal_url: "{{ admin_url('medias/modal/') }}",
+            upload_url: "{{ admin_url('medias/upload/image/') }}",
+            remove_url: "{{ admin_url('medias/remove/image/') }}"
+        });
 
     })
 </script>

@@ -4,9 +4,8 @@
 
 建议把每个配送都做成应用，方便安装和组合使用。
 
+使用方法
 
-**使用方法**
-
-将 Expressbird 移动到 app/Extensions 目录下即可
+> 将 Expressbird 移动到 app/Extensions 目录下即可
 
 进入后台应用管理安装

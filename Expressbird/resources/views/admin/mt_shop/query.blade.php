@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container">
-    <div class="row zhila-row">
+    <div class="row app-row">
         <div class="page-heading">
             <h1 class="page-title">查询门店信息</h1>
             
